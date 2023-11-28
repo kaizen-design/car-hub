@@ -3,7 +3,7 @@
 import { ButtonProps } from "@/types";
 import Image from "next/image";
 
-const Button = ({ title, type, styles, handleClick }: ButtonProps) => {
+const Button = ({ title, type, styles, textStyles, rightIcon, isDisabled, handleClick }: ButtonProps) => {
   return (
     <button
       disabled={false}
@@ -11,9 +11,19 @@ const Button = ({ title, type, styles, handleClick }: ButtonProps) => {
       className={`${styles} btn`}
       onClick={handleClick}
     >
-      <span className={`flex-1`}>
+      <span className={`flex-1 ${textStyles}`}>
         {title}
       </span>
+      {rightIcon && (
+        <div className="relative w-6 h-6">
+          <Image 
+            src={rightIcon}
+            fill
+            className="object-contain"
+            alt={title}
+          />
+        </div>
+      )}
     </button>
   )
 };
