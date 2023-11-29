@@ -45,7 +45,7 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: SearchManufacture
             leaveTo="opacity-0"
             afterLeave={() => setQuery('')}
           >
-            <Combobox.Options>
+            <Combobox.Options className="search-manufacturer__options">
               {filteredManufacturers.length === 0 && query !== '' ? (
                 <div className="search-manufacturer__option">
                   Nothing found.
@@ -71,7 +71,7 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: SearchManufacture
                         </span>
                         {selected ? (
                           <span
-                            className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                            className={`absolute inset-y-0 left-0 flex items-center ${
                               active ? 'text-white' : 'text-teal-600'
                             }`}
                           />
