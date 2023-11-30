@@ -41,3 +41,7 @@ export interface filterProps {
   fuel: string;
   limit: number;
 }
+
+export interface HomeProps {
+  searchParams: filterProps;
+}

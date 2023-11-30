@@ -1,12 +1,13 @@
 import { Hero, SearchBar, CustomFilter, CarCard } from "@/components";
 import { fetchCars } from "@/utils";
+import { HomeProps } from "@/types";
 
-export default async function Home({ searchParams }) {
+export default async function Home({ searchParams }: HomeProps) {
   const allCars = await fetchCars({
     manufacturer: searchParams.manufacturer || '',
     model: searchParams.model || '',
-    year: searchParams.year || 2022,
-    fuel: searchParams.year || '',
+    year: searchParams.year || 2023,
+    fuel: searchParams.fuel || '',
     limit: searchParams.limit || 10
   });
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
@@ -26,21 +27,14 @@ export default async function Home({ searchParams }) {
           </div>
         </div>
         {!isDataEmpty ? (
-          <section>
-            <div className="home__cars-wrapper">
-              {allCars.map((car, i) => (
-                <CarCard 
-                  key={i} 
-                  car={car} 
-                />
-              ))}
-            </div>
+          <section className="home__cars-wrapper">
+            {allCars.map((car, i) => <CarCard key={i} car={car} />)}
           </section>
         ) : (
-          <div className="home__error-container">
+          <section className="home__error-container">
             <h2 className="text-black text-xl font-bold">Ooops, no results.</h2>
             <p>{allCars?.message}</p>
-          </div>
+          </section>
         )}
       </div>
     </main>

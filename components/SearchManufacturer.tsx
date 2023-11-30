@@ -33,7 +33,7 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: SearchManufacture
             />
           </Combobox.Button>
           <Combobox.Input 
-            className="search-manufacturer__input"
+            className="search-manufacturer__input capitalize"
             placeholder="Volkswagen"
             displayValue={(manufacturer: string) => manufacturer}
             onChange={(event) => setQuery(event.target.value)}

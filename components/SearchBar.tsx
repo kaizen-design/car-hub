@@ -1,7 +1,7 @@
 "use client";
 
 import { SearchManufacturer } from ".";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -21,6 +21,14 @@ const SearchBar = () => {
   const router = useRouter();
   const [manufacturer, setManufacturer] = useState('');
   const [model, setModel] = useState('');
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const manufacturer = searchParams.get('manufacturer');
+    const model = searchParams.get('model');
+    if (manufacturer) setManufacturer(manufacturer);
+    if (model) setModel(model);
+  }, []);
   
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -77,7 +85,7 @@ const SearchBar = () => {
           name="model"
           value={model}
           onChange={(e) => setModel(e.target.value)}
-          className="searchbar__input"
+          className="searchbar__input capitalize"
           placeholder="Tiguan"
         />
         <SearchButton styles="sm:hidden" />

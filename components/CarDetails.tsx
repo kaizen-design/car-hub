@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
 import { CarProps } from "@/types";
@@ -12,7 +12,30 @@ interface CarDetailsProps {
   car: CarProps;
 }
 
+interface CarImageThumb {
+  url: string;
+  car: CarProps;
+  setPreview: (url: string) => void;
+}
+
+const CarImageThumb = ({ car, url, setPreview }: CarImageThumb) => (
+  <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg hover:outline hover:outline-primary-blue hover:outline-2">
+    <img 
+      src={url}
+      alt={`${car.make} ${car.model}`}
+      className="object-contain w-full h-24"
+      onMouseOver={() => setPreview(url)}
+    />
+  </div>
+);
+
 const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
+  const [preview, setPreview] = useState(generateCarImageUrl(car));
+  const carThumbnailImages = [
+    generateCarImageUrl(car, '29'),
+    generateCarImageUrl(car, '33'),
+    generateCarImageUrl(car, '13')
+  ];
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -54,35 +77,15 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
                     />
                   </button>
                   <div className="flex flex-col flex-1 gap-3">
-                    <div className="relative w-full h-40 bg-pattern bg-cover bg-center rounded-lg">
+                    <div className="relative w-full h-40 bg-pattern bg-cover bg-center rounded-lg flex items-center justify-center">
                       <img 
-                        src={generateCarImageUrl(car)}
+                        src={preview}
                         alt={`${car.make} ${car.model}`}
                         className="object-contain w-full h-40"
                       />
                     </div>
-                    <div className="flex gap-3">
-                      <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
-                        <img 
-                          src={generateCarImageUrl(car, '29')}
-                          alt={`${car.make} ${car.model}`}
-                          className="object-contain w-full h-24"
-                        />
-                      </div>
-                      <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
-                        <img 
-                          src={generateCarImageUrl(car, '33')}
-                          alt={`${car.make} ${car.model}`}
-                          className="object-contain w-full h-24"
-                        />
-                      </div>
-                      <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
-                        <img 
-                          src={generateCarImageUrl(car, '13')}
-                          alt={`${car.make} ${car.model}`}
-                          className="object-contain w-full h-24"
-                        />
-                      </div>
+                    <div className="flex gap-3" onMouseLeave={() => setPreview(generateCarImageUrl(car))}>
+                      {carThumbnailImages.map((url, i) => <CarImageThumb key={i} car={car} url={url} setPreview={setPreview} />)}
                     </div>
                   </div>
                   <div className="flex flex-1 flex-col gap-2">
