@@ -19,8 +19,8 @@ const SearchButton = ({ styles }: { styles: string }) => (
 
 const SearchBar = () => {
   const router = useRouter();
-  const [manufacturer, setManufacturer] = useState('');
-  const [model, setModel] = useState('');
+  const [manufacturer, setManufacturer] = useState<string>('');
+  const [model, setModel] = useState<string>('');
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
