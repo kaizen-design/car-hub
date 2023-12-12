@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from ".";
 
 const Hero = () => {
@@ -17,12 +18,14 @@ const Hero = () => {
         <p className="hero__subtitle">
           Streamline your car rental experience with our effortless booking process.
         </p>
-        <Button 
-          title="Explore Cars"
-          type="button"
-          styles="primary-blue mt-10"
-          handleClick={handleScroll}
-        />
+        <Link href="#catalog">
+          <Button 
+            title="Explore Cars"
+            type="button"
+            styles="primary-blue mt-10"
+            handleClick={handleScroll}
+          />
+        </Link> 
       </div>
       <div className="hero__image-container">
         <div className="hero__image">
