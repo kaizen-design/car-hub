@@ -7,7 +7,7 @@ import Hero from "./Hero";
 import Navbar from "./Navbar";
 import SearchBar from "./SearchBar";
 import SearchManufacturer from "./SearchManufacturer";
-
+import ShowMore from "./ShowMore";
 
 export {
   Button,
@@ -18,5 +18,6 @@ export {
   Hero,
   Navbar,
   SearchBar,
-  SearchManufacturer
+  SearchManufacturer,
+  ShowMore
 }
